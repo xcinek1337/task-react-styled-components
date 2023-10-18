@@ -8,6 +8,7 @@ const StyledBody = styled.div`
 	background-color: #e1e1e1;
 `;
 const StyledCentredDiv = styled.div`
+	position: relative;
 	width: 500px;
 	height: 600px;
 	border-radius: 50px;

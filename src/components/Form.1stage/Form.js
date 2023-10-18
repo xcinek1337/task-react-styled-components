@@ -11,7 +11,7 @@ const Form = ({ onClick }) => {
 			defaultValue: '',
 			validation: { isReq: true, regex: /^\d{9}$/ },
 		},
-		{ name: '2+2=?', type: 'text', defaultValue: '', validation: { isReq: true } },
+		{ name: '2+2=?', type: 'text', defaultValue: '', validation: { regex: /^4$/, isReq: true } },
 	];
 
 	return <FormHandler onSubmit={onClick} fieldsList={fieldsList} />;
