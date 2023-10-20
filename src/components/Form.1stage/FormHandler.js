@@ -2,7 +2,9 @@ import React, { useReducer, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import validate from './helper';
 
-import './form1stage.css';
+import { Root, FormInput, FormLabel, FormSubmit } from './FormHandler.styled';
+
+// import './form1stage.css';
 
 const FormHandler = props => {
 	const { fieldsList } = props;
@@ -37,9 +39,9 @@ const FormHandler = props => {
 
 			return (
 				<div>
-					<label className='form__label' htmlFor={name}>
+					<FormLabel className='form__label' htmlFor={name}>
 						{name}
-						<input
+						<FormInput
 							placeholder='Write here...'
 							className={inputClasses}
 							onChange={e => dispatch({ type: 'change', key: name, value: e.target.value })}
@@ -48,7 +50,7 @@ const FormHandler = props => {
 							id={name}
 							value={value}
 						/>
-					</label>
+					</FormLabel>
 				</div>
 			);
 		});
@@ -101,13 +103,17 @@ const FormHandler = props => {
 	}, [fieldsList, state]);
 
 	return (
-		<form className='form' onSubmit={handleSubmit}>
-			{renderErros()}
-			{renderFieldList()}
-			<div>
-				<input className='form__submit' value='>' type='submit' />
-			</div>
-		</form>
+		<Root>
+			<form className='form' onSubmit={handleSubmit}>
+				{renderErros()}
+				{renderFieldList()}
+				<div>
+					<FormSubmit>
+						{'>'}
+					</FormSubmit>
+				</div>
+			</form>
+		</Root>
 	);
 };
 
