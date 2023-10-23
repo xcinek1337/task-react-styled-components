@@ -3,12 +3,15 @@ import styled from 'styled-components';
 const StyledDiv = styled.div`
 	width: 100px;
 	height: 100px;
-	background-color: grey;
+	background-color: transparent;
 `;
+
 const StyledImg = styled.img.attrs(() => ({
-	src: './check.svg',
+	src: 'https://upload.wikimedia.org/wikipedia/commons/c/c6/Sign-check-icon.png',
 }))`
-	width: 100px;
+	width: 200px;
+	transform: translate(-24%,-37%);
+	margin: auto;
 `;
 
 export { StyledDiv, StyledImg };

@@ -9,7 +9,7 @@ import Form3 from './components/Form.3stage/Form3';
 import LoadingBar from './components/LoadingBar/LoadingBar';
 
 const FormApp = () => {
-	const [currentStep, setCurrentStep] = useState(3);
+	const [currentStep, setCurrentStep] = useState(1);
 
 	const handleNext = () => {
 		setCurrentStep(currentStep + 1);
