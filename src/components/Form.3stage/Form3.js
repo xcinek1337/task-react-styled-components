@@ -3,7 +3,7 @@ import Confetti from 'react-dom-confetti';
 
 import { Button } from '../Form.2stage/Form2.styled';
 
-import { StyledDiv, StyledImg } from './Form3.styled';
+import { StyledDiv, StyledImg, StyledH2 } from './Form3.styled';
 
 const Form3 = () => {
 	const config = {
@@ -25,16 +25,16 @@ const Form3 = () => {
 		location.reload();
 	};
 
-
-
 	return (
 		<>
 			<Confetti active={activState} config={config} />
 			<StyledDiv>
 				<StyledImg></StyledImg>
-			</StyledDiv>
 
-			<Button style={{position:'absolute',top:'70%'}} onClick={clearStorage}>DONE</Button>
+				<StyledH2>Contgratz</StyledH2>
+
+				<Button onClick={clearStorage}>DONE</Button>
+			</StyledDiv>
 		</>
 	);
 };

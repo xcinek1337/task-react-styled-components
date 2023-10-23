@@ -23,7 +23,7 @@ const FormApp = () => {
 		<>
 			<ResetStyle />
 			<FormArea>
-				<LoadingBar progress={currentStep === 1 ? '10' : currentStep === 2 ? '44' : currentStep === 3 ? '78' : '0'} />
+			<LoadingBar progress={currentStep === 1 ? '10' : currentStep === 2 ? '44' : currentStep === 3 ? '78' : '0'} />
 				{currentStep === 1 && <Form onClick={handleNext} />}
 				{currentStep === 2 && <Form2 onClick={{ handlePrev, handleNext }} />}
 				{currentStep === 3 && <Form3 />}
