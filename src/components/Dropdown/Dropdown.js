@@ -1,31 +1,33 @@
 import React from 'react';
 
-import { StyleDropdown, StyleUlList } from './Dropdown.styled';
+import { StyleDropdown, StyleUlList, StyleLiItem } from './Dropdown.styled';
 
-const Dropdown = ({ trigger, menu }) => {
+const Dropdown = ({ trigger, menu, setTxt }) => {
 	const [open, setOpen] = React.useState(false);
 
 	const handleOpen = () => {
 		setOpen(!open);
+	};
+	const setSelect = textContent => {
+		setTxt(textContent);
 	};
 
 	return (
 		<StyleDropdown>
 			{React.cloneElement(trigger, {
 				onClick: handleOpen,
-				onBlur: handleOpen,
 			})}
 			{open ? (
-				<StyleUlList className='menu'>
+				<StyleUlList>
 					{menu.map((menuItem, index) => (
-						<li key={index} className='menu-item'>
+						<StyleLiItem key={index}>
 							{React.cloneElement(menuItem, {
-								onClick: () => {
-									menuItem.props.onClick();
+								onClick: e => {
+									setSelect(e.target.textContent);
 									setOpen(false);
 								},
 							})}
-						</li>
+						</StyleLiItem>
 					))}
 				</StyleUlList>
 			) : null}

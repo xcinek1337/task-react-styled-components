@@ -2,6 +2,7 @@ import React, { useReducer, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import validate from './helper';
 
+
 import { Root, FormInput, FormLabel, FormSubmit } from './FormHandler.styled';
 
 // import './form1stage.css';
@@ -108,9 +109,7 @@ const FormHandler = props => {
 				{renderErros()}
 				{renderFieldList()}
 				<div>
-					<FormSubmit>
-						{'>'}
-					</FormSubmit>
+					<FormSubmit>{'>'}</FormSubmit>
 				</div>
 			</form>
 		</Root>

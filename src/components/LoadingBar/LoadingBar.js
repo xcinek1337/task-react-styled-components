@@ -1,11 +1,12 @@
 import React from 'react';
 
-import './LoadingBar.css';
+import { ProgressBar } from './LoadingBar.styled';
+
 const LoadingBar = ({ progress }) => {
 	const loadingBarStyle = {
 		width: `${progress}%`,
 	};
-	return <div style={loadingBarStyle} className='loading-bar'></div>;
+	return <ProgressBar style={loadingBarStyle}></ProgressBar>;
 };
 
 export default LoadingBar;

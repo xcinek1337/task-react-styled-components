@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { StyledDiv, StyledImg } from './Form3.styled';
+
 const Form3 = () => {
 	const clearStorage = () => {
 		localStorage.clear();
@@ -7,13 +9,10 @@ const Form3 = () => {
 	};
 	return (
 		<>
-			<div>
-				<img
-					style={{ width: '50px' }}
-					src='https://as2.ftcdn.net/v2/jpg/01/38/68/39/1000_F_138683961_ncOVcRh8Md9wLk3T4mSjffNxiUdi6T7k.jpg'
-					alt=''
-				/>
-			</div>
+			<StyledDiv>
+				<StyledImg></StyledImg>
+			</StyledDiv>
+
 			<button onClick={clearStorage}>DONE</button>
 		</>
 	);

@@ -1,63 +1,58 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Dropdown from '../Dropdown/Dropdown';
 import { BtnLabel, BtnOption } from '../Dropdown/Dropdown.styled';
-import './css.css';
+
+import Checkbox from '../Checkbox/Checkbox';
+import { Button, ButtonsDiv, DivRowFlex, LabelStyled, StyledParagraph } from './Form2.styled';
+import ToggleSwitch from '../ToggleSwitch/ToggleSwitch';
 
 const Form2 = ({ onClick }) => {
+	const [alert, setAlert] = useState(false);
+	const [select, setSelect] = useState('Select');
+	const [click, setClick] = useState(false);
+	const [toggle, setToggle] = useState(false);
+
 	const handlePrev = onClick.handlePrev;
 	const handleNext = onClick.handleNext;
 
-	const handleMenuOne = () => {
-		console.log('clicked one');
+	const setSelectText = textContent => {
+		setSelect(textContent);
 	};
-
-	const handleMenuTwo = () => {
-		console.log('clicked two');
+	const validation = () => {
+		if (select === 'me!!' && click === true && toggle === true) {
+			handleNext();
+		} else {
+			setAlert(true);
+		}
 	};
 
 	return (
 		<>
-			<div style={{ display: 'flex', alignItems: 'center' }}>
-				<label htmlFor=''>Choose me:</label>
+			{alert && <StyledParagraph>Follow the instructions ツ</StyledParagraph>}
+			<DivRowFlex className={'first'}>
+				<LabelStyled>Choose me:</LabelStyled>
 				<Dropdown
-					trigger={<BtnLabel>Select </BtnLabel>}
-					menu={[
-						<BtnOption onClick={handleMenuOne}>Select 1</BtnOption>,
-						<BtnOption onClick={handleMenuOne}>Select 2</BtnOption>,
-						<BtnOption onClick={handleMenuTwo}>Select 3</BtnOption>,
-					]}
+					trigger={<BtnLabel>{select}</BtnLabel>}
+					menu={[<BtnOption>not me.. </BtnOption>, <BtnOption>not me..</BtnOption>, <BtnOption>me!!</BtnOption>]}
+					setTxt={setSelectText}
 				/>
-			</div>
+			</DivRowFlex>
 
-			<div style={{ display: 'flex', alignItems: 'center' }}>
-				<label htmlFor=''>Pick me:</label>
-				{/* <Dropdown
-					trigger={<BtnLabel>Select </BtnLabel>}
-					menu={[
-						<button onClick={handleMenuOne}>Select 1</button>,
-						<button onClick={handleMenuOne}>Select 2</button>,
-						<button onClick={handleMenuTwo}>Select 3</button>,
-					]}
-				/> */}
-			</div>
+			<DivRowFlex className={'second'}>
+				<LabelStyled>pick me:</LabelStyled>
+				<Checkbox click={() => setClick(!click)} />
+			</DivRowFlex>
 
-			<div style={{ display: 'flex', alignItems: 'center' }}>
-				<label htmlFor=''>Toggle me:</label>
-				{/* <Dropdown
-					trigger={<BtnLabel>Select </BtnLabel>}
-					menu={[
-						<button onClick={handleMenuOne}>Select 1</button>,
-						<button onClick={handleMenuOne}>Select 2</button>,
-						<button onClick={handleMenuTwo}>Select 3</button>,
-					]}
-				/> */}
-			</div>
+			<DivRowFlex className={'third'}>
+				<LabelStyled>Toggle me:</LabelStyled>
+				<ToggleSwitch toggle={() => setToggle(!toggle)} />
+			</DivRowFlex>
 
-			<div>
-				<button onClick={handlePrev}> {'<'}</button>
-				<button onClick={handleNext}> {'>'}</button>
-			</div>
+			<ButtonsDiv>
+				<Button onClick={handlePrev}> {'<'}</Button>
+				<Button onClick={validation}> {'>'}</Button>
+			</ButtonsDiv>
 		</>
 	);
 };
