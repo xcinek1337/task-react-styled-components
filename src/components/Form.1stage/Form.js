@@ -2,7 +2,7 @@ import React from 'react';
 
 import FormHandler from './FormHandler';
 
-const Form = ({ onClick }) => {
+const Form = ({ nextStage }) => {
 	const fieldsList = [
 		{ name: 'name:', type: 'text', defaultValue: '', validation: { isReq: true } },
 		{
@@ -14,7 +14,7 @@ const Form = ({ onClick }) => {
 		{ name: '2+2=?', type: 'text', defaultValue: '', validation: { regex: /^4$/, isReq: true } },
 	];
 
-	return <FormHandler onSubmit={onClick} fieldsList={fieldsList} />;
+	return <FormHandler onSubmit={nextStage} fieldsList={fieldsList} />;
 };
 
 export default Form;

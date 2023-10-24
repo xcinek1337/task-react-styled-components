@@ -7,14 +7,14 @@ import Checkbox from '../Checkbox/Checkbox';
 import { Button, ButtonsDiv, DivRowFlex, LabelStyled, StyledParagraph } from './Form2.styled';
 import ToggleSwitch from '../ToggleSwitch/ToggleSwitch';
 
-const Form2 = ({ onClick }) => {
+const Form2 = ({ prevStage, nextStage }) => {
 	const [alert, setAlert] = useState(false);
 	const [select, setSelect] = useState('Select');
 	const [click, setClick] = useState(false);
 	const [toggle, setToggle] = useState(false);
 
-	const handlePrev = onClick.handlePrev;
-	const handleNext = onClick.handleNext;
+	const handlePrev = prevStage;
+	const handleNext = nextStage;
 
 	const setSelectText = textContent => {
 		setSelect(textContent);
