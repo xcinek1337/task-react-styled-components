@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 import validate from './helper';
 
 
-import { Root, FormInput, FormLabel, FormSubmit } from './FormHandler.styled';
-
-// import './form1stage.css';
+import { FormContainer, FormInput, FormLabel, FormSubmit } from './FormHandler.styled';
 
 const FormHandler = props => {
 	const { fieldsList } = props;
@@ -104,7 +102,7 @@ const FormHandler = props => {
 	}, [fieldsList, state]);
 
 	return (
-		<Root>
+		<FormContainer>
 			<form className='form' onSubmit={handleSubmit}>
 				{renderErros()}
 				{renderFieldList()}
@@ -112,7 +110,7 @@ const FormHandler = props => {
 					<FormSubmit>{'>'}</FormSubmit>
 				</div>
 			</form>
-		</Root>
+		</FormContainer>
 	);
 };
 

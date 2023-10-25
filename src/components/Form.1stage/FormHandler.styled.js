@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Root = styled.div`
+const FormContainer = styled.div`
 	--main-color: #8bc6e5;
 `;
 const FormLabel = styled.label`
@@ -57,4 +57,4 @@ const FormSubmit = styled.button.attrs(props => ({
 	}
 `;
 
-export { Root, FormLabel, FormInput, FormSubmit };
+export { FormContainer, FormLabel, FormInput, FormSubmit };
