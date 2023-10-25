@@ -1,20 +1,24 @@
 import React, { useState } from 'react';
 
+import { FormHandling } from '../../FormApp';
+
 import Dropdown from '../Dropdown/Dropdown';
 import { BtnLabel, BtnOption } from '../Dropdown/Dropdown.styled';
 
 import Checkbox from '../Checkbox/Checkbox';
 import { Button, ButtonsDiv, DivRowFlex, LabelStyled, StyledParagraph } from './Form2.styled';
 import ToggleSwitch from '../ToggleSwitch/ToggleSwitch';
+import { useContext } from 'react';
 
-const Form2 = ({ prevStage, nextStage }) => {
+const Form2 = () => {
+	const { handleNext, handlePrev } = useContext(FormHandling);
+	
 	const [alert, setAlert] = useState(false);
 	const [select, setSelect] = useState('Select');
 	const [click, setClick] = useState(false);
 	const [toggle, setToggle] = useState(false);
 
-	const handlePrev = prevStage;
-	const handleNext = nextStage;
+	
 
 	const setSelectText = textContent => {
 		setSelect(textContent);

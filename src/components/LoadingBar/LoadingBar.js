@@ -1,8 +1,9 @@
-import React from 'react';
-
+import React, {useContext} from 'react';
+import { FormHandling } from '../../FormApp';
 import { ProgressBar } from './LoadingBar.styled';
 
-const LoadingBar = ({ currentStage }) => {
+const LoadingBar = () => {
+	const { currentStage} = useContext(FormHandling)
 	const widthes = ['10%', '44%', '77%'];
 	const loadingBarStyle = {
 		width: widthes[currentStage - 1],
