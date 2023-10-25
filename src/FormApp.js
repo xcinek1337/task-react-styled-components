@@ -15,9 +15,8 @@ const FormApp = () => {
 	const [currentStage, setCurrentStage] = useState(1);
 	const Form = formStates[currentStage - 1];
 
-	const handleNext = (txt) => {
-		setCurrentStage(currentStage + 1);	
-		console.log(txt);
+	const handleNext = () => {
+		setCurrentStage(currentStage + 1);
 	};
 
 	const handlePrev = () => {
@@ -25,15 +24,13 @@ const FormApp = () => {
 	};
 
 	return (
-		<>
-			<FormHandling.Provider value={{ handlePrev, handleNext, currentStage }}>
-				<ResetStyle />
-				<FormArea>
-					<LoadingBar />
-					<Form />
-				</FormArea>
-			</FormHandling.Provider>
-		</>
+		<FormHandling.Provider value={{ handlePrev, handleNext, currentStage }}>
+			<ResetStyle />
+			<FormArea>
+				<LoadingBar />
+				<Form />
+			</FormArea>
+		</FormHandling.Provider>
 	);
 };
 
