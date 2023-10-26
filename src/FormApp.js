@@ -11,7 +11,24 @@ import LoadingBar from './components/LoadingBar/LoadingBar';
 const formStates = [Form, Form2, Form3];
 export const FormHandling = React.createContext();
 
+const init = [
+	{
+		fields: [
+			{ name: 'name:', type: 'text', defaultValue: '', validation: { isReq: true } },
+			{
+				name: 'phone:',
+				type: 'text',
+				defaultValue: '',
+				validation: { isReq: true, regex: /^\d{9}$/ },
+			},
+			{ name: '2+2=?', type: 'text', defaultValue: '', validation: { regex: /^4$/, isReq: true } },
+		],
+	},
+	{ fields: [{ alert: false }, { select: 'Select' }, { click: false }, { toggle: false }] },
+];
+
 const FormApp = () => {
+	const [formValues, setFormValues] = useState(init);
 	const [currentStage, setCurrentStage] = useState(1);
 	const Form = formStates[currentStage - 1];
 
@@ -23,8 +40,12 @@ const FormApp = () => {
 		setCurrentStage(currentStage - 1);
 	};
 
+	const inputHandler = () => {};
+
 	return (
-		<FormHandling.Provider value={{ handlePrev, handleNext, currentStage }}>
+		<FormHandling.Provider
+			value={{ handlePrev, handleNext, currentStage, fields: formValues[currentStage - 1].fields, inputHandler }}
+		>
 			<ResetStyle />
 			<FormArea>
 				<LoadingBar />
