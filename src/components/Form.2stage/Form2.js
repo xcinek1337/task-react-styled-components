@@ -11,29 +11,28 @@ import ToggleSwitch from '../ToggleSwitch/ToggleSwitch';
 import { useContext } from 'react';
 
 const Form2 = () => {
-	const { handleNext, handlePrev } = useContext(FormHandling);
-	
-	const [alert, setAlert] = useState(false);
+	const { handleNext, handlePrev, fields, inputHandler } = useContext(FormHandling);
+
+	const alert = fields.alert;
+
 	const [select, setSelect] = useState('Select');
 	const [click, setClick] = useState(false);
 	const [toggle, setToggle] = useState(false);
 
-	
-
 	const setSelectText = textContent => {
 		setSelect(textContent);
+		inputHandler('select', textContent);
 	};
+
 	const validation = () => {
-		if (select === 'me!!' && click === true && toggle === true) {
-			handleNext();
-		} else {
-			setAlert(true);
+		if (fields.canGoFoward) {
+			handleNext;
 		}
 	};
 
 	return (
 		<>
-			{alert && <StyledParagraph>Follow the instructions ツ</StyledParagraph>}
+			{!alert && <StyledParagraph>Follow the instructions ツ</StyledParagraph>}
 			<DivRowFlex className={'first'}>
 				<LabelStyled>Choose me:</LabelStyled>
 				<Dropdown
@@ -45,12 +44,24 @@ const Form2 = () => {
 
 			<DivRowFlex className={'second'}>
 				<LabelStyled>pick me:</LabelStyled>
-				<Checkbox click={() => setClick(!click)} />
+				<Checkbox
+					click={() => {
+						const newClick = !click;
+						setClick(newClick);
+						inputHandler('click', newClick);
+					}}
+				/>
 			</DivRowFlex>
 
 			<DivRowFlex className={'third'}>
 				<LabelStyled>Toggle me:</LabelStyled>
-				<ToggleSwitch toggle={() => setToggle(!toggle)} />
+				<ToggleSwitch
+					toggle={() => {
+						const newToggle = !toggle;
+						setToggle(newToggle);
+						inputHandler('toggle', newToggle);
+					}}
+				/>
 			</DivRowFlex>
 
 			<ButtonsDiv>

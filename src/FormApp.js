@@ -24,7 +24,8 @@ const init = [
 			{ name: '2+2=?', type: 'text', defaultValue: '', validation: { regex: /^4$/, isReq: true } },
 		],
 	},
-	{ fields: [{ alert: false }, { select: 'Select' }, { click: false }, { toggle: false }] },
+	{ fields: { alert: false, select: '', click: false, toggle: false } },
+	{},
 ];
 
 const FormApp = () => {
@@ -40,7 +41,22 @@ const FormApp = () => {
 		setCurrentStage(currentStage - 1);
 	};
 
-	const inputHandler = () => {};
+	const inputHandler = (inputName, inputStatus) => {
+		const fieldsI1 = formValues[1].fields;
+
+		if (currentStage === 2) {
+			const updatedFormValues = { ...formValues };
+			updatedFormValues[1].fields[inputName] = inputStatus;
+			setFormValues(updatedFormValues);
+		}
+		if (fieldsI1.click && fieldsI1.toggle && fieldsI1.select === 'me!!') {
+			fieldsI1.alert = true;
+			fieldsI1.canGoForward = true;
+		} else {
+			fieldsI1.alert = false;
+			fieldsI1.canGoForward = false;
+		}
+	};
 
 	return (
 		<FormHandling.Provider

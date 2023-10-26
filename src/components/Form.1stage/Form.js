@@ -1,13 +1,22 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { FormHandling } from '../../FormApp';
 
 import FormHandler from './FormHandler';
 
 const Form = () => {
-	const { handleNext, fields } = useContext(FormHandling);
+	const { handleNext } = useContext(FormHandling);
+	const fieldsList = [
+		{ name: 'name:', type: 'text', defaultValue: '', validation: { isReq: true } },
+		{
+			name: 'phone:',
+			type: 'text',
+			defaultValue: '',
+			validation: { isReq: true, regex: /^\d{9}$/ },
+		},
+		{ name: '2+2=?', type: 'text', defaultValue: '', validation: { regex: /^4$/, isReq: true } },
+	];
 
-	useEffect(() => () => console.log('unmount'), []);
-	return <FormHandler onSubmit={handleNext} fieldsList={fields} />;
+	return <FormHandler onSubmit={handleNext} fieldsList={fieldsList} />;
 };
 
 export default Form;
