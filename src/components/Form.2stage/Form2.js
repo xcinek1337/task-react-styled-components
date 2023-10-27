@@ -33,9 +33,9 @@ const Form2 = () => {
 		<>
 			{alert && <StyledParagraph>Follow the instructions ツ</StyledParagraph>}
 			{fields.map((field, index) => (
-				<div style={{ width: '100%' }} key={index}>
+				<DivRowFlex  key={index}>
 					{field.type === 'Dropdown' && (
-						<DivRowFlex>
+						<>
 							<LabelStyled>{field.label}:</LabelStyled>
 							<Dropdown
 								trigger={<BtnLabel>{select}</BtnLabel>}
@@ -44,10 +44,10 @@ const Form2 = () => {
 								))}
 								setTxt={setSelectText}
 							/>
-						</DivRowFlex>
+						</>
 					)}
 					{field.type === 'Checkbox' && (
-						<DivRowFlex>
+						<>
 							<LabelStyled>{field.label}:</LabelStyled>
 							<Checkbox
 								click={() => {
@@ -56,10 +56,10 @@ const Form2 = () => {
 									inputHandler('marked', newClick);
 								}}
 							/>
-						</DivRowFlex>
+						</>
 					)}
 					{field.type === 'ToggleSwitch' && (
-						<DivRowFlex>
+						<>
 							<LabelStyled>{field.label}:</LabelStyled>
 							<ToggleSwitch
 								toggle={() => {
@@ -68,9 +68,9 @@ const Form2 = () => {
 									inputHandler('toggled', newToggle);
 								}}
 							/>
-						</DivRowFlex>
+						</>
 					)}
-				</div>
+				</DivRowFlex>
 			))}
 
 			<ButtonsDiv>
