@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 const DivRowFlex = styled.div`
+	margin: 25px 0;
 	display: flex;
 	align-items: center;
 	justify-content: space-evenly;

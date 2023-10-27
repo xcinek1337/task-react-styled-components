@@ -24,14 +24,28 @@ const init = [
 			{ name: '2+2=?', type: 'text', defaultValue: '', validation: { regex: /^4$/, isReq: true } },
 		],
 	},
-	{ fields: { alert: false, select: '', click: false, toggle: false } },
+	{
+		fields: [
+			{
+				type: 'Dropdown',
+				label: 'pick me',
+				default: 'Select',
+				options: ['not me...', 'not me...', 'me!!'],
+				value: '',
+			},
+			{ type: 'Checkbox', label: 'click me', marked: false },
+			{ type: 'ToggleSwitch', label: 'toggle me', toggled: false },
+		],
+	},
 	{},
 ];
 
 const FormApp = () => {
 	const [formValues, setFormValues] = useState(init);
-	const [currentStage, setCurrentStage] = useState(1);
+	const [currentStage, setCurrentStage] = useState(2);
 	const Form = formStates[currentStage - 1];
+	const [alert, setAlert] = useState(true);
+	const [canGoFoward, setCanGoFoward] = useState(false);
 
 	const handleNext = () => {
 		setCurrentStage(currentStage + 1);
@@ -42,25 +56,48 @@ const FormApp = () => {
 	};
 
 	const inputHandler = (inputName, inputStatus) => {
-		const fieldsI1 = formValues[1].fields;
+		const updatedFormValues = { ...formValues };
+
+		const isSelected = updatedFormValues[1].fields.some(field => field.value === 'me!!');
+		const isMarked = updatedFormValues[1].fields.some(field => field.marked === true);
+		const isToggled = updatedFormValues[1].fields.some(field => field.toggled === true);
+
+		console.log('isSelected:', isSelected); // true
+		console.log('isMarked:', isMarked); // true
+		console.log('isToggled:', isToggled); // false
+		console.log(`==================`);
 
 		if (currentStage === 2) {
-			const updatedFormValues = { ...formValues };
-			updatedFormValues[1].fields[inputName] = inputStatus;
-			setFormValues(updatedFormValues);
+			const fieldsI1 = updatedFormValues[1].fields;
+
+			for (const field of fieldsI1) {
+				if (inputName in field) {
+					field[inputName] = inputStatus;
+					break;
+				}
+			}
 		}
-		if (fieldsI1.click && fieldsI1.toggle && fieldsI1.select === 'me!!') {
-			fieldsI1.alert = true;
-			fieldsI1.canGoForward = true;
+
+		if (isMarked && isToggled && isSelected) {
+			setAlert(false);
+			setCanGoFoward(!canGoFoward);
 		} else {
-			fieldsI1.alert = false;
-			fieldsI1.canGoForward = false;
+			setAlert(true);
 		}
+		setFormValues(updatedFormValues);
 	};
 
 	return (
 		<FormHandling.Provider
-			value={{ handlePrev, handleNext, currentStage, fields: formValues[currentStage - 1].fields, inputHandler }}
+			value={{
+				handlePrev,
+				handleNext,
+				currentStage,
+				fields: formValues[currentStage - 1].fields,
+				inputHandler,
+				alert,
+				canGoFoward,
+			}}
 		>
 			<ResetStyle />
 			<FormArea>

@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 const BtnLabel = styled.button`
 	position: relative;
+	min-width: 190px;
 
 	padding: 10px 40px 10px 25px;
 	font-size: 18px;
@@ -39,8 +40,8 @@ const BtnLabel = styled.button`
 
 const BtnOption = styled.button`
 	position: relative;
-	width: 100%;
 	height: 100%;
+	min-width: 190px;
 
 	padding: 10px 20px;
 
