@@ -1,7 +1,6 @@
 import React, { useReducer, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import validate from './helper';
-import { v4 as uuidv4 } from 'uuid';
 
 import { FormContainer, FormInput, FormLabel, FormSubmit } from './FormHandler.styled';
 
