@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { CheckboxLabel, CustomCheckbox, HiddenCheckbox } from './Checkbox.styled';
 
-const Checkbox = ({ click }) => {
+const Checkbox = ({ name, isChecked, inputHandler }) => {
+	const [status, setStatus] = useState(false);
+
+	function handleToggle() {
+		inputHandler(name, status);
+	}
 	return (
 		<>
 			<CheckboxLabel>
-				<HiddenCheckbox></HiddenCheckbox>
-				<CustomCheckbox onClick={click}></CustomCheckbox>
+				<HiddenCheckbox onChange={handleToggle} checked={isChecked}></HiddenCheckbox>
+				<CustomCheckbox onClick={() => setStatus(!status)}></CustomCheckbox>
 			</CheckboxLabel>
 		</>
 	);

@@ -1,7 +1,7 @@
 import React, { useReducer, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import validate from './helper';
-
+import { v4 as uuidv4 } from 'uuid';
 
 import { FormContainer, FormInput, FormLabel, FormSubmit } from './FormHandler.styled';
 
@@ -37,7 +37,7 @@ const FormHandler = props => {
 			const inputClasses = `form__input ${error ? 'form__input--error' : ''}`;
 
 			return (
-				<div>
+				<div key={name || type}>
 					<FormLabel className='form__label' htmlFor={name}>
 						{name}
 						<FormInput

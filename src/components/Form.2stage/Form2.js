@@ -15,12 +15,10 @@ const Form2 = () => {
 
 	// hardcoded index state default name select component state
 	const [select, setSelect] = useState(fields[0].default);
-	const [click, setClick] = useState(false);
-	const [toggle, setToggle] = useState(false);
 
-	const setSelectText = textContent => {
+	const setSelectText = (fieldName, textContent) => {
 		setSelect(textContent);
-		inputHandler('value', textContent);
+		inputHandler(fieldName, textContent);
 	};
 
 	const validation = () => {
@@ -33,12 +31,13 @@ const Form2 = () => {
 		<>
 			{alert && <StyledParagraph>Follow the instructions ツ</StyledParagraph>}
 			{fields.map((field, index) => (
-				<DivRowFlex  key={index}>
+				<DivRowFlex key={index}>
 					{field.type === 'Dropdown' && (
 						<>
 							<LabelStyled>{field.label}:</LabelStyled>
 							<Dropdown
-								trigger={<BtnLabel>{select}</BtnLabel>}
+								name={field.name}
+								trigger={<BtnLabel>{field.value || 'Select'}</BtnLabel>}
 								menu={field.options.map(option => (
 									<BtnOption key={option}>{option}</BtnOption>
 								))}
@@ -49,25 +48,13 @@ const Form2 = () => {
 					{field.type === 'Checkbox' && (
 						<>
 							<LabelStyled>{field.label}:</LabelStyled>
-							<Checkbox
-								click={() => {
-									const newClick = !click;
-									setClick(newClick);
-									inputHandler('marked', newClick);
-								}}
-							/>
+							<Checkbox name={field.name} isChecked={field.value} inputHandler={inputHandler} />
 						</>
 					)}
 					{field.type === 'ToggleSwitch' && (
 						<>
 							<LabelStyled>{field.label}:</LabelStyled>
-							<ToggleSwitch
-								toggle={() => {
-									const newToggle = !toggle;
-									setToggle(newToggle);
-									inputHandler('toggled', newToggle);
-								}}
-							/>
+							<ToggleSwitch name={field.name} isChecked={field.value} inputHandler={inputHandler} />
 						</>
 					)}
 				</DivRowFlex>

@@ -1,16 +1,21 @@
 import React, { useState } from 'react';
 import { CheckboxInput, CheckboxLabel } from './ToggleSwitch.styled';
 
-const ToggleSwitch = ({ toggle }) => {
-	const [isChecked, setIsChecked] = React.useState(false);
+const ToggleSwitch = ({ name, isChecked, inputHandler }) => {
+	const [status, setStatus] = useState(true);
+	function handleToggle() {
+		inputHandler(name, status);
+	}
 
-	const handleToggle = () => {
-		setIsChecked(!isChecked);
-		toggle();
-	};
 	return (
 		<div>
-			<CheckboxInput onChange={handleToggle} checked={isChecked} type='checkbox' id='switch' />
+			<CheckboxInput
+				onClick={() => setStatus(!status)}
+				onChange={handleToggle}
+				checked={isChecked}
+				type='checkbox'
+				id='switch'
+			/>
 			<CheckboxLabel checked={isChecked} htmlFor='switch' />
 		</div>
 	);

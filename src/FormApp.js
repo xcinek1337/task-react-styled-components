@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import ResetStyle from '../assets/img/resetCss/ResetStyle';
 import { CentredDiv as FormArea } from './components/CentredDiv/CentredDiv';
@@ -7,6 +7,7 @@ import Form from './components/Form.1stage/Form';
 import Form2 from './components/Form.2stage/Form2';
 import Form3 from './components/Form.3stage/Form3';
 import LoadingBar from './components/LoadingBar/LoadingBar';
+import customInputsValidate from './components/smallValidate';
 
 const formStates = [Form, Form2, Form3];
 export const FormHandling = React.createContext();
@@ -27,14 +28,15 @@ const init = [
 	{
 		fields: [
 			{
+				name: 'dropdown',
 				type: 'Dropdown',
 				label: 'pick me',
 				default: 'Select',
 				options: ['not me...', 'not me...', 'me!!'],
 				value: '',
 			},
-			{ type: 'Checkbox', label: 'click me', marked: false },
-			{ type: 'ToggleSwitch', label: 'toggle me', toggled: false },
+			{ name: 'checkbox', type: 'Checkbox', label: 'click me', value: false },
+			{ name: 'toggle', type: 'ToggleSwitch', label: 'toggle me', value: false },
 		],
 	},
 	{},
@@ -42,7 +44,7 @@ const init = [
 
 const FormApp = () => {
 	const [formValues, setFormValues] = useState(init);
-	const [currentStage, setCurrentStage] = useState(2);
+	const [currentStage, setCurrentStage] = useState(1);
 	const Form = formStates[currentStage - 1];
 	const [alert, setAlert] = useState(true);
 	const [canGoFoward, setCanGoFoward] = useState(false);
@@ -56,36 +58,27 @@ const FormApp = () => {
 	};
 
 	const inputHandler = (inputName, inputStatus) => {
-		const updatedFormValues = { ...formValues };
+		const updatedFormValues = [...formValues];
 
-		const isSelected = updatedFormValues[1].fields.some(field => field.value === 'me!!');
-		const isMarked = updatedFormValues[1].fields.some(field => field.marked === true);
-		const isToggled = updatedFormValues[1].fields.some(field => field.toggled === true);
+		const { fields } = updatedFormValues[currentStage - 1];
+		const fieldIndex = fields.findIndex(item => item.name === inputName);
 
-		console.log('isSelected:', isSelected); // true
-		console.log('isMarked:', isMarked); // true
-		console.log('isToggled:', isToggled); // false
-		console.log(`==================`);
+		if (fieldIndex !== -1) {
+			const field = fields[fieldIndex];
 
-		if (currentStage === 2) {
-			const fieldsI1 = updatedFormValues[1].fields;
+			fields[fieldIndex] = { ...field, value: inputStatus };
 
-			for (const field of fieldsI1) {
-				if (inputName in field) {
-					field[inputName] = inputStatus;
-					break;
-				}
-			}
+			updatedFormValues[currentStage - 1] = { ...updatedFormValues[currentStage - 1], fields };
+
+			setFormValues(updatedFormValues);
 		}
-
-		if (isMarked && isToggled && isSelected) {
-			setAlert(false);
-			setCanGoFoward(!canGoFoward);
-		} else {
-			setAlert(true);
-		}
-		setFormValues(updatedFormValues);
 	};
+
+	useEffect(() => {
+		const isValidateOk = customInputsValidate(formValues, currentStage, 'me!!');
+		setCanGoFoward(isValidateOk);
+		setAlert(!isValidateOk);
+	}, [formValues]);
 
 	return (
 		<FormHandling.Provider

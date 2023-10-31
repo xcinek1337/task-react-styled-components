@@ -2,14 +2,14 @@ import React from 'react';
 
 import { StyleDropdown, StyleUlList, StyleLiItem } from './Dropdown.styled';
 
-const Dropdown = ({ trigger, menu, setTxt }) => {
+const Dropdown = ({ trigger, menu, setTxt, name }) => {
 	const [open, setOpen] = React.useState(false);
 
 	const handleOpen = () => {
 		setOpen(!open);
 	};
 	const setSelect = textContent => {
-		setTxt(textContent);
+		setTxt(name, textContent);
 	};
 
 	return (

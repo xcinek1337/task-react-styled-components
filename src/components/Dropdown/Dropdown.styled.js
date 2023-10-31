@@ -1,9 +1,4 @@
 import styled from 'styled-components';
-
-// --main-color: #8bc6e5;
-//               vvvv
-//     color: inherit;
-
 const BtnLabel = styled.button`
 	position: relative;
 	min-width: 190px;
