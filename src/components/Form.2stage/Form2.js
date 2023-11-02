@@ -32,9 +32,9 @@ const Form2 = () => {
 			{alert && <StyledParagraph>Follow the instructions ツ</StyledParagraph>}
 			{fields.map((field, index) => (
 				<DivRowFlex key={index}>
+					<LabelStyled>{field.label}:</LabelStyled>
 					{field.type === 'Dropdown' && (
 						<>
-							<LabelStyled>{field.label}:</LabelStyled>
 							<Dropdown
 								name={field.name}
 								trigger={<BtnLabel>{field.value || 'Select'}</BtnLabel>}
@@ -47,13 +47,11 @@ const Form2 = () => {
 					)}
 					{field.type === 'Checkbox' && (
 						<>
-							<LabelStyled>{field.label}:</LabelStyled>
 							<Checkbox name={field.name} isChecked={field.value} inputHandler={inputHandler} />
 						</>
 					)}
 					{field.type === 'ToggleSwitch' && (
 						<>
-							<LabelStyled>{field.label}:</LabelStyled>
 							<ToggleSwitch name={field.name} isChecked={field.value} inputHandler={inputHandler} />
 						</>
 					)}
